@@ -18,14 +18,14 @@ variable "iso_url" {
   default = "https://cdimage.kali.org/kali-2022.4/kali-linux-2022.4-installer-netinst-amd64.iso"
 }
 
-variable "ssh_username" {
+variable "username" {
   type    = string
-  default = "vagrant"
+  default = "user"
 }
 
 variable "vm_name" {
   type    = string
-  default = "debian-11.0.0-amd64"
+  default = "kali-rolling"
 }
 
 variable "output_directory" {
@@ -45,13 +45,13 @@ source "vmware-iso" "kali" {
   guest_os_type    = "debian10-64"
   headless         = false
   http_content     = {
-    "/preseed.cfg"  = templatefile("${path.root}/http/preseed.cfg", {"user" = "${var.ssh_username}"})
+    "/preseed.cfg"  = templatefile("${path.root}/http/preseed.cfg", {"user" = "${var.username}"})
   }
   iso_checksum     = "${var.iso_checksum}"
   iso_url          = "${var.iso_url}"
   shutdown_command = "echo 'vagrant'|sudo -S shutdown -P now"
-  ssh_username     = "${var.ssh_username}"
-  ssh_password     = "${var.ssh_username}"
+  ssh_username     = "${var.username}"
+  ssh_password     = "${var.username}"
   ssh_port         = 22
   ssh_timeout      = "60m"
   vm_name          = "${var.vm_name}"
