@@ -10,12 +10,12 @@ variable "disk_size" {
 
 variable "iso_checksum" {
   type    = string
-  default = "54cf16e191c0b61334e9f6c1ce633c922398e13136d4b99723c64286b171646a"
+  default = "0b0f5560c21bcc1ee2b1fef2d8e21dca99cc6efa938a47108bbba63bec499779"
 }
 
 variable "iso_url" {
   type    = string
-  default = "https://cdimage.kali.org/kali-2022.4/kali-linux-2022.4-installer-netinst-amd64.iso"
+  default = "https://cdimage.kali.org/kali-2023.3/kali-linux-2023.3-installer-netinst-amd64.iso"
 }
 
 variable "username" {
@@ -49,7 +49,7 @@ source "vmware-iso" "kali" {
   }
   iso_checksum     = "${var.iso_checksum}"
   iso_url          = "${var.iso_url}"
-  shutdown_command = "echo 'vagrant'|sudo -S shutdown -P now"
+  shutdown_command = "echo '${var.username}'|sudo -S shutdown -P now"
   ssh_username     = "${var.username}"
   ssh_password     = "${var.username}"
   ssh_port         = 22
